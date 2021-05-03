@@ -17,7 +17,7 @@ public class App {
       switch (option) {
         case 1:
           System.out.println();
-          int trainOption = TrainOption();
+          int trainOption = trainOption();
 
           switch (trainOption) {
             case 1:
@@ -42,7 +42,11 @@ public class App {
 
         case 2:
           System.out.println();
-          System.out.println("Infer");
+          String phrase = getPhrase();
+          if (phrase != null) {
+            // TODO: Try to infer
+            System.out.println(phrase);
+          }
           System.out.println();
           break;
       }
@@ -71,7 +75,7 @@ public class App {
     return option;
   }
 
-  private static int TrainOption() {
+  private static int trainOption() {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int option = 0;
 
@@ -131,6 +135,22 @@ public class App {
     }
 
     return path;
+  }
+
+  private static String getPhrase() {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String phrase = "";
+
+    System.out.print("Insert the phrase: ");
+
+    try {
+      phrase = br.readLine();
+    } catch (IOException e) {
+      System.out.println("An error occurred reading the phrase");
+      return null;
+    }
+
+    return phrase;
   }
 
   private static void parseFlags(String[] flags) {
