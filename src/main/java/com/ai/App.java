@@ -59,7 +59,7 @@ public class App {
     int option = 0;
 
     do {
-      System.out.println("What do you want to do?");
+      System.out.println("\nWhat do you want to do?");
       System.out.println("  1) Train");
       System.out.println("  2) Infer");
       System.out.println("  3) Exit");
@@ -68,7 +68,7 @@ public class App {
       try {
         option = Integer.parseInt(br.readLine());
       } catch (IOException | NumberFormatException e) {
-        System.out.println("That's not a valid option.\n");
+        System.out.println("That's not a valid option.");
       }
     } while (option != 1 && option != 2 && option != 3);
 
@@ -80,7 +80,7 @@ public class App {
     int option = 0;
 
     do {
-      System.out.println("What kind of training do you want to do?");
+      System.out.println("\nWhat kind of training do you want to do?");
       System.out.println("  1) One phrase");
       System.out.println("  2) Bulk file");
       System.out.println("  3) None");
@@ -89,7 +89,7 @@ public class App {
       try {
         option = Integer.parseInt(br.readLine());
       } catch (IOException | NumberFormatException e) {
-        System.out.println("That's not a valid option.\n");
+        System.out.println("That's not a valid option.");
       }
     } while (option != 1 && option != 2 && option != 3);
 
