@@ -28,6 +28,10 @@ public class Bow {
     }
   }
 
+  public void trainPhrase(String phrase, String tag) {
+    List<String> words = normalizePhrase(phrase);
+  }
+
   private String getPhrase(String[] text) {
     String phrase = "";
     for (int i = 0; i < text.length - 1; i++) {
