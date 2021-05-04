@@ -672,7 +672,7 @@ I work from 9 a.m. to 6 p.m.|ingles
 Come by this afternoon.|ingles
 How many flights of stairs should I go up?|ingles
 I've decided to quit smoking this year.|ingles
-"I read the book, Who moved my cheese?"" today."""" read the book"|inglesSaya memutuskan untuk berhenti merokok tahun ini.
+"I read the book, Who moved my cheese?"" today."""" read the book"|ingles
 Do you think these clothes will fit me?|ingles
 You were completely drunk last night.|ingles
 Why did you do that?|ingles
@@ -760,7 +760,7 @@ I always sleep on my side.|ingles
 Do you have problems with your car again?|ingles
 I grew up in the countryside.|ingles
 Is this seat taken?|ingles
-"Socrates said, Know yourself.""""""ocrates said"|inglesApakah tempat ini kosong?
+"Socrates said, Know yourself.""""""ocrates said"|ingles
 Don't be shy. Just act natural.|ingles
 Do you feel you lost your freedom after getting married?|ingles
 Jajangmyeon is a very popular Chinese dish.|ingles
@@ -1672,7 +1672,6 @@ Dar vuelta a la derecha en el parque.|español
 Trabajo a partir de las nueve de la mañana hasta las seis de la tarde.|español
 Venga luego a la tarde.|español
 ¿Cuántos escalones tengo que subir?|español
-今日 '誰が私のチーズを動かしたの？'という本を読んだ。|español
 Hoy leí el libro, “¿Quién movió mi queso?”.|español
 ¿Piensas que estas ropas me quedarán bien?|español
 Ayer por la noche estabas totalmente tomado.|español
@@ -1760,7 +1759,6 @@ No preguntes lo mismo constantemente.|español
 Yo duermo siempre de costasdo.|español
 ¿El coche tiene otra vez problemas?|español
 Yo  crecí en el campo.|español
-"ソクラテスが 汝自身を知れ""と言った。""""クラテスが ""汝自身を知""""ラテスが """|español
 Socrates dijo, “conócete a ti mismo. ”|español
 No seas tímido. Actuá de forma natural.|español
 ¿Siente que ha perdido la livertad después de haberse casado?|español
@@ -2998,3 +2996,5 @@ Sungai kecil mengalir dekat rumah saya.|hindi
 Warna putih sesuai dengan kulit gelapmu|hindi
 Saya tidak punya energi untuk bermain tennis hari ini.|hindi
 Sangat sulit mencari pekerjaan akhir-akhir ini.|hindi
+Saya memutuskan untuk berhenti merokok tahun ini.|hindi
+Apakah tempat ini kosong?|hindi
