@@ -22,6 +22,6 @@ target/
 .mvn/
 
 # Latex
-.aux
-.log
-.out
+*.aux
+*.log
+*.out
