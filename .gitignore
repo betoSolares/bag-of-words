@@ -20,3 +20,8 @@ texlipse
 # Maven
 target/
 .mvn/
+
+# Latex
+.aux
+.log
+.out
