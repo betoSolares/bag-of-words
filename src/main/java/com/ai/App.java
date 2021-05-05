@@ -1,5 +1,6 @@
 package com.ai;
 
+import com.ai.bow.Bow;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +10,7 @@ import java.util.AbstractMap;
 public class App {
   public static void main(String[] args) {
     int option = 0;
+    Bow bow = new Bow();
     parseFlags(args);
 
     do {
@@ -16,38 +18,28 @@ public class App {
 
       switch (option) {
         case 1:
-          System.out.println();
           int trainOption = trainOption();
 
           switch (trainOption) {
             case 1:
               AbstractMap.SimpleImmutableEntry<String, String> value = onePhrase();
-              if (value != null) {
-                // TODO: Train the model with a phrase
-                System.out.println(value);
-              }
+              if (value != null) bow.trainPhrase(value.getKey(), value.getValue());
               break;
 
             case 2:
               String path = getPath();
-              if (path != null) {
-                // TODO: Train the model with a file
-                System.out.println(path);
-              }
+              if (path != null) bow.trainFile(path);
               break;
           }
 
-          System.out.println();
           break;
 
         case 2:
-          System.out.println();
           String phrase = getPhrase();
           if (phrase != null) {
             // TODO: Try to infer
             System.out.println(phrase);
           }
-          System.out.println();
           break;
       }
 
@@ -141,7 +133,7 @@ public class App {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String phrase = "";
 
-    System.out.print("Insert the phrase: ");
+    System.out.print("\nInsert the phrase: ");
 
     try {
       phrase = br.readLine();

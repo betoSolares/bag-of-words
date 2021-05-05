@@ -4,10 +4,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Bow {
+
+  private int total;
+  private Map<String, Integer> tagTotals;
+  private Map<String, Map<String, Integer>> tagWords;
+
+  public Bow() {
+    total = 0;
+    tagTotals = new HashMap<String, Integer>();
+    tagWords = new HashMap<String, Map<String, Integer>>();
+  }
+
   public void trainFile(String path) {
     try {
       List<String> lines = Files.lines(Path.of(path)).collect(Collectors.toList());
@@ -19,6 +32,7 @@ public class Bow {
         if (parts.length >= 2) {
           String tag = parts[parts.length - 1];
           List<String> words = normalizePhrase(getPhrase(parts));
+          train(tag, words);
         } else {
           System.out.println("The line " + (i + 1) + " is not in the correct format");
         }
@@ -30,6 +44,32 @@ public class Bow {
 
   public void trainPhrase(String phrase, String tag) {
     List<String> words = normalizePhrase(phrase);
+    train(tag, words);
+  }
+
+  private void train(String tag, List<String> words) {
+    total += words.size();
+    try {
+      tagTotals.put(tag, tagTotals.get(tag) + words.size());
+    } catch (NullPointerException e) {
+      tagTotals.put(tag, words.size());
+    }
+
+    Map<String, Integer> count;
+    try {
+      count = new HashMap<String, Integer>(tagWords.get(tag));
+    } catch (NullPointerException e) {
+      count = new HashMap<String, Integer>();
+    }
+
+    for (String word : words) {
+      try {
+        count.put(word, count.get(word) + 1);
+      } catch (NullPointerException e) {
+        count.put(word, 1);
+      }
+    }
+    tagWords.put(tag, count);
   }
 
   private String getPhrase(String[] text) {
