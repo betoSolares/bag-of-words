@@ -22,6 +22,8 @@ target/
 .mvn/
 
 # Latex
-*.aux
-*.log
-*.out
+docs/**
+!docs/research.bib
+!docs/research.pdf
+!docs/research.tex
+!docs/ACM-Reference-Format.bst
