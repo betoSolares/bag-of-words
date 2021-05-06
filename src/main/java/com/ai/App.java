@@ -37,8 +37,10 @@ public class App {
         case 2:
           String phrase = getPhrase();
           if (phrase != null) {
-            // TODO: Try to infer
-            System.out.println(phrase);
+            if (!bow.infer(phrase)) {
+              String tag = getTag();
+              bow.trainPhrase(phrase, tag);
+            }
           }
           break;
       }
@@ -93,7 +95,7 @@ public class App {
     String phrase = "";
     String tag = "";
 
-    System.out.print("Insert the phrase: ");
+    System.out.print("\nInsert the phrase: ");
     try {
       phrase = br.readLine();
     } catch (IOException e) {
@@ -116,7 +118,7 @@ public class App {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String path = "";
 
-    System.out.println("You are in: " + Path.of("").toAbsolutePath().toString());
+    System.out.println("\nYou are in: " + Path.of("").toAbsolutePath().toString());
     System.out.print("Insert the path to the file: ");
 
     try {
@@ -143,6 +145,22 @@ public class App {
     }
 
     return phrase;
+  }
+
+  private static String getTag() {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String tag = "";
+
+    System.out.print("\nInsert the tag to retrain the model: ");
+
+    try {
+      tag = br.readLine();
+    } catch (IOException e) {
+      System.out.println("An error occurred reading the phrase");
+      return null;
+    }
+
+    return tag;
   }
 
   private static void parseFlags(String[] flags) {
