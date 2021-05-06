@@ -3,8 +3,11 @@ package com.ai.bow;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,11 +15,13 @@ import java.util.stream.Collectors;
 public class Bow {
 
   private int total;
+  private List<String> tags;
   private Map<String, Integer> tagTotals;
   private Map<String, Map<String, Integer>> tagWords;
 
   public Bow() {
     total = 0;
+    tags = new ArrayList<String>();
     tagTotals = new HashMap<String, Integer>();
     tagWords = new HashMap<String, Map<String, Integer>>();
   }
@@ -24,6 +29,7 @@ public class Bow {
   public void trainFile(String path) {
     try {
       List<String> lines = Files.lines(Path.of(path)).collect(Collectors.toList());
+      int iniitial = total;
 
       for (int i = 0; i < lines.size(); i++) {
         String line = lines.get(i);
@@ -37,18 +43,56 @@ public class Bow {
           System.out.println("The line " + (i + 1) + " is not in the correct format");
         }
       }
+      System.out.println((total - iniitial) + " new words are analyzed");
+
     } catch (IOException e) {
       System.out.println("Can't read file: " + Path.of(path));
     }
   }
 
   public void trainPhrase(String phrase, String tag) {
+    int iniitial = total;
     List<String> words = normalizePhrase(phrase);
     train(tag, words);
+    System.out.println((total - iniitial) + " new words are analyzed");
+  }
+
+  public boolean infer(String phrase) {
+    List<String> words = normalizePhrase(phrase);
+
+    if (total == 0) {
+      System.out.println("\nThere is no data");
+      return false;
+    }
+
+    if (tags.size() == 1) {
+      System.out.println("\nThere must be at least two tags");
+      return false;
+    }
+
+    Map<String, List<Double>> probability = getProbability(words);
+    Map<String, Double> results = naiveBayes(probability);
+
+    System.out.println("\nFeatures Set:");
+    System.out.println(words);
+    System.out.println("\nProbabilities:");
+
+    for (Map.Entry<String, Double> pair : results.entrySet()) {
+      System.out.println(pair.getKey() + " = " + pair.getValue());
+
+      if (pair.getValue() >= 0.65) {
+        train(pair.getKey(), words);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   private void train(String tag, List<String> words) {
     total += words.size();
+    if (!tags.contains(tag)) tags.add(tag);
+
     try {
       tagTotals.put(tag, tagTotals.get(tag) + words.size());
     } catch (NullPointerException e) {
@@ -70,6 +114,89 @@ public class Bow {
       }
     }
     tagWords.put(tag, count);
+  }
+
+  private Map<String, List<Double>> getProbability(List<String> words) {
+    Map<String, List<Double>> table = new HashMap<String, List<Double>>();
+
+    for (String tag : tagWords.keySet()) {
+      int tagTotal = tagTotals.get(tag);
+      List<Double> jointProbability = new ArrayList<Double>();
+      Map<String, Integer> frequency = tagWords.get(tag);
+
+      for (String word : words) {
+        try {
+          jointProbability.add((double) (frequency.get(word) + 1) / (tagTotal + words.size()));
+        } catch (NullPointerException e) {
+          jointProbability.add((double) 1 / (tagTotal + words.size()));
+        }
+      }
+
+      table.put(tag, jointProbability);
+    }
+
+    return table;
+  }
+
+  private Map<String, Double> naiveBayes(Map<String, List<Double>> probability) {
+    Map<String, Double> result = new HashMap<String, Double>();
+
+    for (String key : probability.keySet()) {
+      double numerator = 1;
+      double denominator = 1;
+
+      for (Double value : probability.get(key)) {
+        numerator *= value;
+        denominator *= value;
+      }
+
+      double tagProbability =
+          (double) (tagTotals.get(key) + probability.get(key).size())
+              / (total + probability.get(key).size());
+      numerator *= tagProbability;
+      denominator *= tagProbability;
+
+      for (String subkey : probability.keySet()) {
+        if (!subkey.equals(key)) {
+          double newResult = 1;
+
+          for (Double value : probability.get(subkey)) {
+            newResult *= value;
+          }
+
+          tagProbability =
+              (double) (tagTotals.get(subkey) + probability.get(subkey).size())
+                  / (total + probability.get(subkey).size());
+          newResult *= tagProbability;
+          denominator += newResult;
+        }
+      }
+
+      result.put(key, numerator / denominator);
+    }
+
+    return sortResults(result);
+  }
+
+  private Map<String, Double> sortResults(Map<String, Double> results) {
+    Map<String, Double> cleanResult = new HashMap<String, Double>();
+
+    for (Map.Entry<String, Double> pair : results.entrySet()) {
+      if (Double.isNaN(pair.getValue())) cleanResult.put(pair.getKey(), 0.0);
+      else cleanResult.put(pair.getKey(), pair.getValue());
+    }
+
+    Map<String, Double> newResult =
+        cleanResult.entrySet().stream()
+            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            .collect(
+                Collectors.toMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue,
+                    (oldValue, newValue) -> oldValue,
+                    LinkedHashMap::new));
+
+    return newResult;
   }
 
   private String getPhrase(String[] text) {
