@@ -29,7 +29,7 @@ public class Bow {
   public void trainFile(String path) {
     try {
       List<String> lines = Files.lines(Path.of(path)).collect(Collectors.toList());
-      int iniitial = total;
+      int initial = total;
 
       for (int i = 0; i < lines.size(); i++) {
         String line = lines.get(i);
@@ -43,7 +43,7 @@ public class Bow {
           System.out.println("The line " + (i + 1) + " is not in the correct format");
         }
       }
-      System.out.println((total - iniitial) + " new words are analyzed");
+      System.out.println((total - initial) + " new words are analyzed");
 
     } catch (IOException e) {
       System.out.println("Can't read file: " + Path.of(path));
@@ -51,10 +51,10 @@ public class Bow {
   }
 
   public void trainPhrase(String phrase, String tag) {
-    int iniitial = total;
+    int initial = total;
     List<String> words = normalizePhrase(phrase);
     train(tag, words);
-    System.out.println((total - iniitial) + " new words are analyzed");
+    System.out.println((total - initial) + " new words are analyzed");
   }
 
   public boolean infer(String phrase) {
