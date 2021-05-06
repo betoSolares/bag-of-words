@@ -43,9 +43,13 @@ public class App {
             }
           }
           break;
+
+        case 3:
+          bow.showKnowledge();
+          break;
       }
 
-    } while (option != 3);
+    } while (option != 4);
   }
 
   private static int mainMenu() {
@@ -56,7 +60,8 @@ public class App {
       System.out.println("\nWhat do you want to do?");
       System.out.println("  1) Train");
       System.out.println("  2) Infer");
-      System.out.println("  3) Exit");
+      System.out.println("  3) Show Knowledge");
+      System.out.println("  4) Exit");
       System.out.print("Put the number of the option: ");
 
       try {
@@ -64,7 +69,7 @@ public class App {
       } catch (IOException | NumberFormatException e) {
         System.out.println("That's not a valid option.");
       }
-    } while (option != 1 && option != 2 && option != 3);
+    } while (option != 1 && option != 2 && option != 3 && option != 4);
 
     return option;
   }

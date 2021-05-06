@@ -81,12 +81,23 @@ public class Bow {
       System.out.println(pair.getKey() + " = " + pair.getValue());
 
       if (pair.getValue() >= 0.65) {
+        System.out.println("\nThe tag is: " + pair.getKey());
         train(pair.getKey(), words);
         return true;
       }
     }
 
+    System.out.println("\nCould not determine the tag");
     return false;
+  }
+
+  public void showKnowledge() {
+    System.out.println("\nTotal numbers of words: " + total);
+    System.out.println("Tags: " + String.join(", ", tags));
+    System.out.println("Words per tag:");
+    for (Map.Entry<String, Integer> pair : tagTotals.entrySet()) {
+      System.out.println(pair.getKey() + " = " + pair.getValue());
+    }
   }
 
   private void train(String tag, List<String> words) {
