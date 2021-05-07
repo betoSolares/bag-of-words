@@ -1,6 +1,7 @@
 package com.ai.bow;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Bow {
 
@@ -18,12 +23,16 @@ public class Bow {
   private List<String> tags;
   private Map<String, Integer> tagTotals;
   private Map<String, Map<String, Integer>> tagWords;
+  private JSONParser jsonParser;
+  private Tags supportedTags;
 
   public Bow() {
     total = 0;
     tags = new ArrayList<String>();
     tagTotals = new HashMap<String, Integer>();
     tagWords = new HashMap<String, Map<String, Integer>>();
+    jsonParser = new JSONParser();
+    supportedTags = new Tags();
   }
 
   public void trainFile(String path) {
@@ -36,8 +45,8 @@ public class Bow {
         String[] parts = line.split("\\|");
 
         if (parts.length >= 2) {
-          String tag = parts[parts.length - 1];
-          List<String> words = normalizePhrase(getPhrase(parts));
+          String tag = parts[parts.length - 1].toLowerCase();
+          List<String> words = removeStopWords(normalizePhrase(getPhrase(parts)), tag);
           train(tag, words);
         } else {
           System.out.println("The line " + (i + 1) + " is not in the correct format");
@@ -52,8 +61,8 @@ public class Bow {
 
   public void trainPhrase(String phrase, String tag) {
     int initial = total;
-    List<String> words = normalizePhrase(phrase);
-    train(tag, words);
+    List<String> words = removeStopWords(normalizePhrase(phrase), tag.toLowerCase());
+    train(tag.toLowerCase(), words);
     System.out.println((total - initial) + " new words are analyzed");
   }
 
@@ -229,5 +238,28 @@ public class Bow {
             .split("\\s+");
 
     return Arrays.asList(words);
+  }
+
+  private List<String> removeStopWords(List<String> words, String tag) {
+    List<String> goodWords = new ArrayList<String>();
+
+    if (!supportedTags.existsTag(tag)) return words;
+
+    try {
+      Object obj =
+          jsonParser.parse(
+              new InputStreamReader(Bow.class.getResourceAsStream("/com/ai/stopwords-all.json")));
+
+      JSONObject jsonObject = (JSONObject) obj;
+      JSONArray stopwords = (JSONArray) jsonObject.get(supportedTags.getCode(tag));
+
+      for (String word : words) {
+        if (!stopwords.contains(word)) goodWords.add(word);
+      }
+
+      return goodWords;
+    } catch (IOException | ParseException | NullPointerException e) {
+      return words;
+    }
   }
 }
