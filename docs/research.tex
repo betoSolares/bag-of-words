@@ -1,15 +1,21 @@
-\documentclass[format=sigconf, review=false, natbib=false]{acmart}
+\documentclass[sigconf,12pt,review=false,natbib=false]{acmart}
 
 \usepackage[style=ACM-Reference-Format,backend=bibtex,sorting=nty]{biblatex}
 \addbibresource{research.bib}
 
 \begin{document}
 
+% ACM Format
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
 %Title
 \title{Bag of words with Bayesian Network to detect languages}
 
 %Authors
-\settopmatter{authorsperrow=4}
+\settopmatter{authorsperrow=2}
 
 \author{Santiago E. Bocel}
 \affiliation{%
@@ -18,6 +24,14 @@
     \city{Guatemala City}
     \country{Guatemala}}
 \email{santiagobocel10@gmail.com}
+
+\author{Roberto Solares}
+\affiliation{%
+    \institution{Universidad Rafael Landívar}
+    \postcode{01016}
+    \city{Guatemala City}
+    \country{Guatemala}}
+\email{betosolaresgar@gmail.com}
 
 \author{Brenner Hernandez}
 \affiliation{%
@@ -35,46 +49,40 @@
     \country{Guatemala}}
 \email{pablomuralles28@gmail.com}
 
-\author{Roberto Solares}
-\affiliation{%
-    \institution{Universidad Rafael Landívar}
-    \postcode{01016}
-    \city{Guatemala City}
-    \country{Guatemala}}
-\email{betosolaresgar@gmail.com}
-
 % abstract
 \begin{abstract}
 
-Something as background
+Text classification also known as text tagging or text categorization is the process of categorizing
+text into organized groups. By using Natural Language Processing (NLP), text classifiers can
+automatically analyze text and then assign a set of pre-defined tags or categories based on its
+content. \\
+
+There are different types of text classifiers, for example, language detection, process automation,
+virtual legislation, sentiment detection, etc. That is why the classification of texts is becoming
+an increasingly important tool, since it allows us to obtain information from data and make use of
+them quickly, something that is very important in the information age. \\
+
+On the other hand, machine learning in its most basic form is the practice of using algorithms to
+analyze data, learn from it, and then make a determination or prediction about something in the
+world. Where there are endless techniques for learning, representation and optimization. \\
+
+It is for these reasons that the combination of machine learning with text classification is a very
+powerful but at the same time very complex tool and a field in which there is still much to
+explore. \\
 
 \end{abstract}
-
-% concepts
-\begin{CCSXML}
-<ccs2012>
-    <concept>
-        <concept_id>10010147.10010257.10010293.10010300.10010306</concept_id>
-        <concept_desc>Computing methodologies~Bayesian network models</concept_desc>
-        <concept_significance>500</concept_significance>
-    </concept>
-</ccs2012>
-\end{CCSXML}
-
-\ccsdesc[500]{Computing methodologies~Bayesian network models}
-
-% keywords
-\keywords{bag of words, bayesian network}
 
 \maketitle
 
 \section{Introduction}
 
-Text classification is one of the applications of Machine Learning and consists of cataloging the texts based on their content, that is, performing an analysis of the words to decide what type of text is being identified.
-\newline
-\newline
-This work is ideal for a machine as they are ideal for processing large amounts of information. However, since the machine does not initially know how to catalog a text based on any criteria, it requires a learning process in advance.
-\newline
+Text classification is one of the applications of Machine Learning and consists of cataloging the
+texts based on their content, that is, performing an analysis of the words to decide what type of
+text is being identified. \\
+
+This work is ideal for a machine as they are ideal for processing large amounts of information.
+However, since the machine does not initially know how to catalog a text based on any criteria, it
+requires a learning process in advance. \\
 
 % References
 \nocite{*}
