@@ -27,3 +27,4 @@ docs/**
 !docs/research.pdf
 !docs/research.tex
 !docs/ACM-Reference-Format.bst
+!docs/*.png
