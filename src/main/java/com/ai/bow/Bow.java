@@ -147,8 +147,8 @@ public class Bow {
       for (String word : words) {
         if (frequency.containsKey(word))
           probability.add(
-              (double) (frequency.get(word) + 1) / (wordsInTag + getTotalInAllTags(word)));
-        else probability.add((double) 1 / (wordsInTag + getTotalInAllTags(word)));
+              (double) (frequency.get(word) + 1) / (wordsInTag + getTotalInAllTags(word) * 100));
+        else probability.add((double) 1 / (wordsInTag + getTotalInAllTags(word) * 100));
       }
 
       conditionalProbabilities.put(tag, probability);
@@ -159,6 +159,7 @@ public class Bow {
 
   private Map<String, Double> naiveBayes(Map<String, List<Double>> conditionalProbabilities) {
     Map<String, Double> result = new HashMap<String, Double>();
+    System.out.println(conditionalProbabilities);
 
     for (Map.Entry<String, List<Double>> entry : conditionalProbabilities.entrySet()) {
       String tag = entry.getKey();
