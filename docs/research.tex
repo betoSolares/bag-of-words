@@ -367,7 +367,7 @@ vote" between the K points: those of a class / dominant label will decide its fi
 Since the KNN algorithm is highly used in recommendation systems, it is at the core of Netflix recommendation systems,
 so much so that Netflix hosts an annual competition in order to improve its system more and more. \\
 
-\subsection{Naive Bayes}
+\subsection{Different Types of Naive Bayes}
 
 As we can see, the ease of the naive bayes algorithm has made it one of the most used when dealing
 with text classification problems, especially those that use a bag of words model. There are several types of
@@ -465,7 +465,7 @@ structure previously stated: \\
 
 All this would have been in vain if the backend of our agent did not work, it has two major tasks: training and inferring. \\
 
-\subsubsection{Training}
+\subsection{Training}
 
 In the training part we use the following structure: \\
 
@@ -478,10 +478,10 @@ In the training part we use the following structure: \\
 \end{figure}
 
 In the cleaning phase, the first thing we do is remove all misspelled words (letters combined with numbers) and the numbers
-themselves, since they do not add any value to any type of text in any human language. After this we remove stopwords for
-certain languages, the way we know which language is if it matches the category. \\
+themselves, since they do not add any value to any type of text in any human language. After this we remove stopwords if the
+text is in a certain tag. \\
 
-\begin{table}
+\begin{table}[h!]
     \caption{Stopwords per tag}
     \label{tab:stopwords}
     \begin{minipage}{\columnwidth}
@@ -519,7 +519,41 @@ certain languages, the way we know which language is if it matches the category.
     \end{minipage}
 \end{table}
 
+\subsection{Infer}
 
+At the time of inferring we do not clean the text since we do not know the exact label. What we do
+first is to calculate the conditional probabilities of each word given a certain tag. Finally,
+since we have our joint probabilities, we apply the Bayes theorem as can be seen in Figure 3. \\
+
+Now suppose that a word that we are trying to infer is not found in our dataset, this would give us
+a value of 0 so all our probability would be 0. We solve this using Laplace Smoothing, which is
+basically adding one to the frequency of each word. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics{laplace}
+    \Description{Laplace Smoothing}
+    \caption{Laplace Smoothing}
+    \label{fig:laplace}
+\end{figure}
+
+So the algorithm and the workflow at the time of inferring would be as follows:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=3in]{algorithm}
+    \Description{Naive Bayes Algorithm}
+    \caption{Naive Bayes Algorithm}
+    \label{fig:algorithm}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=2in]{workflow}
+    \Description{Infer Workflow}
+    \caption{Infer Workflow}
+    \label{fig:workflow}
+\end{figure}
 
 \section{Results}
 
@@ -534,7 +568,7 @@ As part of the user experience, one could see the knowledge owned by the solutio
 \end{figure}
 
 As part of the results achived when trying to infer a language from an input, we got the following results with the
-training data detailed in Figure 11: \\
+training data detailed in Figure 18. \\
 
 \begin{figure}[h!]
     \centering
@@ -543,6 +577,9 @@ training data detailed in Figure 11: \\
     \caption{Inference results}
     \label{fig:inference}
 \end{figure}
+
+It was also observed that there are occasions in which the agent fails in the classification due to the fact that when
+smoothing is applied, some tags that have few words are left with very high probabilities. \\
 
 \section{Conclusions}
 
@@ -561,6 +598,9 @@ training data detailed in Figure 11: \\
       fast even when they start cold. \\
 
   \item[$\bullet$] Automatic learning was specifically applied to the supervised learning branch. \\
+
+  \item[$\bullet$] The most difficult part of creating an intelligent agent is not applying the algorithms, but rather
+      selecting and cleaning the data so that it is meaningful and good results are obtained. \\
 
 \end{description}
 
