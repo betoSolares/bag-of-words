@@ -79,7 +79,7 @@ public class Bow {
       return false;
     }
 
-    Map<String, List<Double>> probability = getProbability(words);
+    Map<String, List<Double>> probability = getConditional(words);
     Map<String, Double> results = naiveBayes(probability);
 
     System.out.println("\nFeatures Set:");
@@ -136,66 +136,74 @@ public class Bow {
     tagWords.put(tag, count);
   }
 
-  private Map<String, List<Double>> getProbability(List<String> words) {
-    Map<String, List<Double>> table = new HashMap<String, List<Double>>();
+  private Map<String, List<Double>> getConditional(List<String> words) {
+    Map<String, List<Double>> conditionalProbabilities = new HashMap<String, List<Double>>();
 
-    for (String tag : tagWords.keySet()) {
-      int tagTotal = tagTotals.get(tag);
-      List<Double> jointProbability = new ArrayList<Double>();
+    for (String tag : tags) {
+      List<Double> probability = new ArrayList<Double>();
       Map<String, Integer> frequency = tagWords.get(tag);
+      int wordsInTag = tagTotals.get(tag);
 
       for (String word : words) {
-        try {
-          jointProbability.add((double) (frequency.get(word) + 1) / (tagTotal + words.size()));
-        } catch (NullPointerException e) {
-          jointProbability.add((double) 1 / (tagTotal + words.size()));
-        }
+        if (frequency.containsKey(word))
+          probability.add(
+              (double) (frequency.get(word) + 1) / (wordsInTag + getTotalInAllTags(word)));
+        else probability.add((double) 1 / (wordsInTag + getTotalInAllTags(word)));
       }
 
-      table.put(tag, jointProbability);
+      conditionalProbabilities.put(tag, probability);
     }
 
-    return table;
+    return conditionalProbabilities;
   }
 
-  private Map<String, Double> naiveBayes(Map<String, List<Double>> probability) {
+  private Map<String, Double> naiveBayes(Map<String, List<Double>> conditionalProbabilities) {
     Map<String, Double> result = new HashMap<String, Double>();
 
-    for (String key : probability.keySet()) {
+    for (Map.Entry<String, List<Double>> entry : conditionalProbabilities.entrySet()) {
+      String tag = entry.getKey();
+      List<Double> conditional = entry.getValue();
+      double prior = (double) (tagTotals.get(tag) + 1) / (total + tags.size());
       double numerator = 1;
       double denominator = 1;
 
-      for (Double value : probability.get(key)) {
+      for (double value : conditional) {
         numerator *= value;
         denominator *= value;
       }
 
-      double tagProbability =
-          (double) (tagTotals.get(key) + probability.get(key).size())
-              / (total + probability.get(key).size());
-      numerator *= tagProbability;
-      denominator *= tagProbability;
+      for (Map.Entry<String, List<Double>> sub : conditionalProbabilities.entrySet()) {
+        String subtag = sub.getKey();
 
-      for (String subkey : probability.keySet()) {
-        if (!subkey.equals(key)) {
-          double newResult = 1;
+        if (!subtag.equals(tag)) {
+          double newOne = 1;
+          List<Double> subconditional = sub.getValue();
+          prior = (double) (tagTotals.get(subtag) + 1) / (total + tags.size());
 
-          for (Double value : probability.get(subkey)) {
-            newResult *= value;
+          for (Double value : subconditional) {
+            newOne *= value;
           }
 
-          tagProbability =
-              (double) (tagTotals.get(subkey) + probability.get(subkey).size())
-                  / (total + probability.get(subkey).size());
-          newResult *= tagProbability;
-          denominator += newResult;
+          denominator += (prior * newOne);
         }
       }
 
-      result.put(key, numerator / denominator);
+      result.put(tag, numerator / denominator);
     }
 
     return sortResults(result);
+  }
+
+  private int getTotalInAllTags(String word) {
+    int total = 0;
+
+    for (String tag : tags) {
+      Map<String, Integer> frequency = tagWords.get(tag);
+
+      if (frequency.containsKey(word)) total += frequency.get(word);
+    }
+
+    return total;
   }
 
   private Map<String, Double> sortResults(Map<String, Double> results) {
