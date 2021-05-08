@@ -84,8 +84,16 @@ public class Bow {
 
     System.out.println("\nFeatures Set:");
     System.out.println(words);
-    System.out.println("\nProbabilities:");
 
+    System.out.println("\nProbabilities:");
+    for (String key : probability.keySet()) {
+      List<Double> p = probability.get(key);
+      for (int i = 0; i < words.size(); i++) {
+        System.out.println("P(" + words.get(i) + "|" + key + ") = " + p.get(i));
+      }
+    }
+
+    System.out.println("\nResults:");
     for (Map.Entry<String, Double> pair : results.entrySet()) {
       System.out.println(pair.getKey() + " = " + pair.getValue());
 
@@ -159,7 +167,6 @@ public class Bow {
 
   private Map<String, Double> naiveBayes(Map<String, List<Double>> conditionalProbabilities) {
     Map<String, Double> result = new HashMap<String, Double>();
-    System.out.println(conditionalProbabilities);
 
     for (Map.Entry<String, List<Double>> entry : conditionalProbabilities.entrySet()) {
       String tag = entry.getKey();
