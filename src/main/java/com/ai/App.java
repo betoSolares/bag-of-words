@@ -100,72 +100,82 @@ public class App {
     String phrase = "";
     String tag = "";
 
-    System.out.print("\nInsert the phrase: ");
-    try {
-      phrase = br.readLine();
-    } catch (IOException e) {
-      System.out.println("An error occurred reading the phrase");
-      return null;
-    }
+    do {
+      System.out.print("\nInsert the phrase: ");
+      try {
+        phrase = br.readLine();
+      } catch (IOException e) {
+        System.out.println("An error occurred reading the phrase");
+        return null;
+      }
+    } while (phrase.isBlank());
 
-    System.out.print("Insert the tag: ");
-    try {
-      tag = br.readLine();
-    } catch (IOException e) {
-      System.out.println("An error occurred reading the tag");
-      return null;
-    }
+    do {
+      System.out.print("Insert the tag: ");
+      try {
+        tag = br.readLine();
+      } catch (IOException e) {
+        System.out.println("An error occurred reading the tag");
+        return null;
+      }
+    } while (tag.isBlank());
 
-    return new AbstractMap.SimpleImmutableEntry<String, String>(phrase, tag);
+    return new AbstractMap.SimpleImmutableEntry<String, String>(phrase.trim(), tag.trim());
   }
 
   private static String getPath() {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String path = "";
 
-    System.out.println("\nYou are in: " + Path.of("").toAbsolutePath().toString());
-    System.out.print("Insert the path to the file: ");
+    do {
+      System.out.println("\nYou are in: " + Path.of("").toAbsolutePath().toString());
+      System.out.print("Insert the path to the file: ");
 
-    try {
-      path = br.readLine();
-    } catch (IOException e) {
-      System.out.println("An error occurred reading the path");
-      return null;
-    }
+      try {
+        path = br.readLine();
+      } catch (IOException e) {
+        System.out.println("An error occurred reading the path");
+        return null;
+      }
+    } while (path.isBlank());
 
-    return path;
+    return path.trim();
   }
 
   private static String getPhrase() {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String phrase = "";
 
-    System.out.print("\nInsert the phrase: ");
+    do {
+      System.out.print("\nInsert the phrase: ");
 
-    try {
-      phrase = br.readLine();
-    } catch (IOException e) {
-      System.out.println("An error occurred reading the phrase");
-      return null;
-    }
+      try {
+        phrase = br.readLine();
+      } catch (IOException e) {
+        System.out.println("An error occurred reading the phrase");
+        return null;
+      }
+    } while (phrase.isBlank());
 
-    return phrase;
+    return phrase.trim();
   }
 
   private static String getTag() {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String tag = "";
 
-    System.out.print("\nInsert the tag to retrain the model: ");
+    do {
+      System.out.print("\nInsert the tag to retrain the model: ");
 
-    try {
-      tag = br.readLine();
-    } catch (IOException e) {
-      System.out.println("An error occurred reading the phrase");
-      return null;
-    }
+      try {
+        tag = br.readLine();
+      } catch (IOException e) {
+        System.out.println("An error occurred reading the phrase");
+        return null;
+      }
+    } while (tag.isBlank());
 
-    return tag;
+    return tag.trim();
   }
 
   private static void parseFlags(String[] flags) {
