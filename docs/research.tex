@@ -318,9 +318,6 @@ of interaction with the user, the recommendations must improve. \\
 The sofware had to be develped using any JVM compatible language, with the option of using any type of data base.
 
 
-\section{Our Solution}
-
-
 \section{Similar Implementations}
 
 Another type of algorithms commonly used in automatic classification of texts are:
@@ -329,7 +326,7 @@ Another type of algorithms commonly used in automatic classification of texts ar
 
 This algorithm is a text classification method. It corresponds to learning machines that take different characteristics
 of the elements that want to classify and take them to a multidimensional vector space. It is in this space, where the
-algorithm identifies a hyperplane that separates the vectors into a class different of the rest. \\
+algorithm identifies a hyperphan that separates the vectors into a class different of the rest. \\
 
 The solution for a Bag of Words classification is simple. Suppose that in the following image the blue dots represent
 a language and the red dots other language, if a line is drawn between them, when there is a new point, we can say what
@@ -341,6 +338,41 @@ color is going to have, depending on the side of the line in which you are. \\
     \Description{Support vector machine}
     \caption{Support vector machine}
     \label{fig:svm}
+\end{figure}
+
+The line that best separates the zone of the blue dots from the red dots area is the line that maximizes the margin
+between them. Support vector machines are a Machine Learning technique that finds the best possible separation between
+classes. With two dimensions it is easy to understand what you are doing. Normally, automatic learning problems have a
+lot of dimensions. So instead of finding the optimal line, the SVM finds the hyperphan that maximizes the margin of
+separation between classes.
+
+\subsection{K-nearest neighbors algorithm (KNN)}
+
+This is a learning algorithm based on supervised type instances of Machine Learning. It is used to classify new samples
+or to predict. It is a simple method, looks for the closest observations to which you are trying to predict and classify
+the point of interest based on most data that surrounds it. \\
+
+The solution for a Bag of Words classification is also simple.
+The distance between the word to classify and the rest of the words of the training dataset should be calculated. Then
+select the closest elements (with less distance, according to the function that is used). Finally, perform a "majority
+vote" between the K points: those of a class / dominant label will decide its final classification.
+
+
+
+\section{Our Solution}
+
+In a way or another, we used all of the information previously exposed to acomplish this solution for the given problem.
+We developed a Bag of Words with Naive Bayes using the Java programming language.
+
+The interaction that the user will have with our solution will be through the command line. They will be presented
+with a series of menus, firstly they will see the main menu:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[]{main_menu}
+    \Description{Main menu}
+    \caption{Main menu}
+    \label{fig:main_menu}
 \end{figure}
 
 \section{Results}
