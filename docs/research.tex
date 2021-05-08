@@ -104,13 +104,13 @@ recognition. \\
 This paper is structured as follows. The Fundamentals section describes the prior knowledge that the
 reader is recommended to possess in order to have a better understanding of the research. In the
 section The problem, the problem to be solved with this investigation is detailed as well as its
-requirements. The Similar Implementations section describes which experiments and projects have
-solved the same problem and how they have done it. In the section Our Solution, it is explained in
-detail how the solution was carried out, as well as why certain decisions were made and what problems
-were encountered when carrying out the same. The Results section describes what information could be
-obtained both in the training phase as well as in the experimentation and testing phase. Finally, the
-Conclusions section expresses the thoughts and observations of the authors after conducting the
-research. \\
+requirements. The Similar Implementations section tries to describe the state of the art by showing
+what techniques exist for text classification as well as what other experiments and projects have
+solved similar problems. In the section Our Solution, it is explained in detail how the solution was
+carried out, as well as why certain decisions were made and what problems were encountered when
+carrying out the same. The Results section describes what information could be obtained both in the
+training phase as well as in the experimentation and testing phase. Finally, the Conclusions section
+expresses the thoughts and observations of the authors after conducting the research. \\
 
 \section{Fundamentals}
 
@@ -287,11 +287,11 @@ system. It does the work of identifying all documents that are important for the
 
 This is also a core part of our project, thus, we will detail how our solution uses this algorithm. \\
 
-\section{Our Problem}
+\section{Problem}
 
 We are four university students and are currently coursing our fourth year of computer engineering. In this semester
 we enrolled to the Artificial Intelligence course, and so, we were assigned with this final project. We had to 
-implemente the fist stage of a text classification system to identify languages through input text.
+implemente the fist stage of a text classification system to identify languages through input text. \\
 
 For this, we were appointed to use a Bag of Words system, in conjunction with a Bayesian model, more specifically,
 Naive Bayes. \\
@@ -302,13 +302,17 @@ the language in which that phrase was written; our solution will have to split t
 in this case being a '|' (pipe character). Some examples could be: \\ 
 
 \begin{description}
+
   \item[$\ast$] la vida empieza cada cinco minutos | español 
+
   \item[$\ast$] it is a good day to be happy | ingles
+
   \item[$\ast$] eu te quero com tudo meu coração | portugues \\ 
+
 \end{description}
 
 If the input is a user given phrase, we must be able to ask them for the corresonding name tag and associating each 
-other.
+other. \\
 
 The solution must process any given number of lines or phrases with any given number of labels. When inserting a new
 line or phrase the solution must be readjusted. It must be taken into account that when reading a CSV file or similar,
@@ -345,6 +349,9 @@ classes. With two dimensions it is easy to understand what you are doing. Normal
 lot of dimensions. So instead of finding the optimal line, the SVM finds the hyperphan that maximizes the margin of
 separation between classes. \\
 
+One of the most advanced agents is Karspersky's LightAgent product, which tries to research and offer cybersecurity
+in large organizations. This is done in python and with libraries like TensorFlow and NumPy. \\
+
 \subsection{K-nearest neighbors algorithm (KNN)}
 
 This is a learning algorithm based on supervised type instances of Machine Learning. It is used to classify new samples
@@ -356,6 +363,59 @@ The solution for a Bag of Words classification is also simple. \\
 The distance between the word to classify and the rest of the words of the training dataset should be calculated. Then
 select the closest elements (with less distance, according to the function that is used). Finally, perform a "majority
 vote" between the K points: those of a class / dominant label will decide its final classification. \\
+
+Since the KNN algorithm is highly used in recommendation systems, it is at the core of Netflix recommendation systems,
+so much so that Netflix hosts an annual competition in order to improve its system more and more. \\
+
+\subsection{Naive Bayes}
+
+As we can see, the ease of the naive bayes algorithm has made it one of the most used when dealing
+with text classification problems, especially those that use a bag of words model. There are several types of
+implementations of this, some of these are:\\
+
+A great example of this is the Tunisian commercial bank that its using a Naive Bayesian classifier methodology
+for loan risk assessment. \\
+
+\subsubsection{Bernoulli Naive Bayes}
+
+The Bernoulli Naive Bayes algorithm is excellent to use when working with boolean variables, that is,
+when there is presence or absence of these, this is because the algorithm assumes that the features are
+totally independent. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[]{bernoulli}
+    \Description{Bernoulli Naive Bayes Formula}
+    \caption{Bernoulli Naive Bayes Formula}
+    \label{fig:bnbf}
+\end{figure}
+
+\subsubsection{Multinomial Naive Bayes}
+
+The multinomial naive bayes algorithm is excellent to use when working with several samples of different
+variables, since these represent the frequency of occurrence and make the problem can be represented
+as a histogram. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[]{multinomial}
+    \Description{Bernoulli Naive Bayes Formula}
+    \caption{Bernoulli Naive Bayes Formula}
+    \label{fig:bnbf}
+\end{figure}
+
+\subsubsection{Gaussian Naive Bayes}
+
+The gaussian naive bayes algorithm is excellent to use when working with continuous data because making
+use of the mean and standard deviation gives us adjusted data for each case. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[]{gaussian}
+    \Description{Bernoulli Naive Bayes Formula}
+    \caption{Bernoulli Naive Bayes Formula}
+    \label{fig:bnbf}
+\end{figure}
 
 \section{Our Solution}
 
@@ -402,6 +462,64 @@ structure previously stated: \\
     \caption{Bulk file}
     \label{fig:bulk_file}
 \end{figure}
+
+All this would have been in vain if the backend of our agent did not work, it has two major tasks: training and inferring. \\
+
+\subsubsection{Training}
+
+In the training part we use the following structure: \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=3in]{structure}
+    \Description{Training Structure}
+    \caption{Training Structure}
+    \label{fig:bulk_file}
+\end{figure}
+
+In the cleaning phase, the first thing we do is remove all misspelled words (letters combined with numbers) and the numbers
+themselves, since they do not add any value to any type of text in any human language. After this we remove stopwords for
+certain languages, the way we know which language is if it matches the category. \\
+
+\begin{table}
+    \caption{Stopwords per tag}
+    \label{tab:stopwords}
+    \begin{minipage}{\columnwidth}
+    \begin{center}
+    \begin{tabular}{c c c c}
+        \toprule
+            WORD & NUMBER & WORD & NUMBER\\
+        Afrikaans & 51 & Arabic & 162\\
+        Armenian & 45 & Basque & 98 \\
+        Bengali & 116 & Breton & 126 \\
+        Bulgarian & 259 & Catalan & 218\\
+        Chinese & 542 & Croatian & 179 \\
+        Czech & 346 & Danish & 101 \\
+        Dutch & 275 & English & 570 \\
+        Esperanto & 173 & Estonian & 35 \\
+        Finnish & 772 & French & 606 \\
+        Galician & 160 & German & 596 \\
+        Greek & 75 & Hausa & 39 \\
+        Hebrew & 194 & Hindi & 225 \\
+        Hungarian & 781 & Indonesian & 355 \\
+        Irish & 109 & Italian & 619 \\
+        Japanese & 109 & Korean & 679 \\
+        Latin & 49 & Latvian & 161 \\
+        Marathi & 99 & Norwegian & 172 \\
+        Persian & 332 & Polish & 260 \\
+        Portuguese & 408 & Romanian & 282 \\
+        Russian & 539 & Slovak & 110 \\
+        Slovenian & 446 & Somalia & 30 \\
+        Southern Sotho & 31 & Spanish  & 577 \\
+        Swahili & 74 & Swedish & 401 \\
+        Thai & 115 & Turkish & 279 \\
+        Yoruba & 60 & Zulu & 29 \\
+    \end{tabular}
+    \end{center}
+    \end{minipage}
+\end{table}
+
+
 
 \section{Results}
 
