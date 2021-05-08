@@ -289,7 +289,32 @@ seeks the information. \\
 
 This is also a core part of our project, thus, we will detail how our solution uses this algorithm.
 
-\section{Problem}
+\section{Our Problem}
+
+We are four university students and are currently coursing our fourth year of computer engineering. In this semester
+we enrolled to the Artificial Intelligence course, and so, we were assigned with this final project. We had to 
+implemente the fist stage of a text classification system to identify languages through input text.
+For this, we were appointed to use a Bag of Words system, in conjunction with a Bayesian model, more specifically,
+Naive Bayes. \\
+
+This implementation must support input text from files and user given phrases. These file inputs must follow a specific
+structure; the first part of the input must be phrase in any language, the second part must be a name tag describing
+the language in which that phrase was written; our solution will have to split this parts with a given separator,
+in this case being a '|' (pipe character). Some examples could be: \\ 
+
+\begin{description}
+  \item[$\ast$] la vida empieza cada cinco minutos | español 
+  \item[$\ast$] it is a good day to be happy | ingles
+  \item[$\ast$] eu te quero com tudo meu coração | portugues
+\end{description}
+
+If the input is a user given phrase, we must be able to ask them for the corresonding name tag and associating each 
+other.
+The solution must process any given number of lines or phrases with any given number of labels. When inserting a new
+line or phrase the solution must be readjusted. It must be taken into account that when reading a CSV file or similar,
+the data should be normalized and cleaned. In addition, the solution must have a cold start option and at the time
+of interaction with the user, the recommendations must improve.
+
 
 \section{Similar Implementations}
 
