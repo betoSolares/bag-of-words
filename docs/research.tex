@@ -12,7 +12,7 @@
 \pagestyle{plain}
 
 %Title
-\title{Bag of words with Bayesian Network to detect languages}
+\title{Bag of words with Naive Bayes to detect languages}
 
 %Authors
 \settopmatter{authorsperrow=2}
@@ -139,7 +139,8 @@ to text for analysis.
 
 \subsection{Machine Learning}
 
-It consists of machines learning without having to be explicitly programmed for a task with previous data.
+It consists of machines learning without having to be explicitly programmed for a given task, relyng only on
+previous data.
 Some of the fundamentals for this branch are inferential statistics, computer science and pattern recognition.
 Going deeper with statistics, Bayes' theorem is very important since it tells us the probability that an event will
 occur given the knowledge of certain previous conditions related to this event.
@@ -197,8 +198,7 @@ known as the chain rule. \\
 \subsection{Statistical inference}
 
 For an artificial intelligence to try to predict using some classification algorithm it must first learn its
-probabilistic theories about the world from experience. \\
-
+probabilistic theories about the world from experience. 
 Statistical inference is the induction that allows establishing a truth with a higher probability index than
 the others. With this, artificial intelligence acquires a tool to solve specific problems, such as the classification
 of information. \\
@@ -241,23 +241,22 @@ that it is equivalent to the joint probability. \\
 \subsection{Naive Bayes}
 Naive Bayes is a simple and powerful algorithm. Despite the significant advances in Machine Learning in recent
 years, it has proven its worth. It has been successfully implemented in many applications, from text analysis
-to recommendation engines.
+to recommendation engines. \\
 
 It is one of the simplest and most powerful algorithms for classification based on Bayes' Theorem with an assumption
 of independence between the predictors. It assumes that the effect of a particular feature on a class is independent
-of other features.
+of other features. \\
 
 Using the algorithm it is quick and easy to predict the kind of test data set. They also work well in multiclass
 prediction. When the independence assumption is held, a Naive Bayes classifier performs better compared to other
 models and less training data is required.
-It works well for categorical input variables compared to numeric variables.
+It works well for categorical input variables compared to numeric variables. \\
 
 The disadvantages of using this algorithm are that if the categorical variable has a category in the test data set,
 which was not observed in the training data set, the model assigns a probability of 0 and will not be able to make
 a prediction. This is often known as the zero frequency. The smoothing technique can be used to solve this problem.
-
 Another disadvantage is the assumption of independent predictors. In real life it is almost impossible for us to
-obtain a set of predictors that are completely independent.
+obtain a set of predictors that are completely independent. \\
 
 This algorithm serves a core part in our solution, wo we will talk more on how we implemented it.
 
@@ -268,6 +267,27 @@ This algorithm serves a core part in our solution, wo we will talk more on how w
     \caption{Naive Bayes}
     \label{fig:naive_bayes}
 \end{figure}
+
+
+\subsection{Bag of Words}
+
+The Bag of Words is a method often used for document classification. This method turns text into fixed-length
+vectors by simply counting the number of times a word appears in a document, a process referred to as vectorization. \\
+
+Although these vectorization methods are easy to compute, it lacks any contextual information. It literally is a bag
+of words – there is no order, it’s only the word counts that matter.
+It is a data recovery system. It does the work of identifying all documents that are important for the user who
+seeks the information. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=3in]{bow}
+    \Description{Naive Bayes}
+    \caption{Naive Bayes}
+    \label{fig:bow}
+\end{figure}
+
+This is also a core part of our project, thus, we will detail how our solution uses this algorithm.
 
 \section{Problem}
 
