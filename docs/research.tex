@@ -305,7 +305,7 @@ in this case being a '|' (pipe character). Some examples could be: \\
 \begin{description}
   \item[$\ast$] la vida empieza cada cinco minutos | español 
   \item[$\ast$] it is a good day to be happy | ingles
-  \item[$\ast$] eu te quero com tudo meu coração | portugues
+  \item[$\ast$] eu te quero com tudo meu coração | portugues \\ 
 \end{description}
 
 If the input is a user given phrase, we must be able to ask them for the corresonding name tag and associating each 
@@ -313,16 +313,31 @@ other.
 The solution must process any given number of lines or phrases with any given number of labels. When inserting a new
 line or phrase the solution must be readjusted. It must be taken into account that when reading a CSV file or similar,
 the data should be normalized and cleaned. In addition, the solution must have a cold start option and at the time
-of interaction with the user, the recommendations must improve.
+of interaction with the user, the recommendations must improve. \\
+
+The sofware had to be develped using any JVM compatible language, with the option of using any type of data base.
+
+
+\section{Our Solution}
 
 
 \section{Similar Implementations}
 
-\section{Our Solution}
-
 \section{Results}
 
 \section{Conclusions}
+
+\begin{description}
+  \item[$\bullet$ One of the greatest advantages of Naive Bayes over other classification algorithms is its ability
+      to process an extremely large amount of data.]
+  \item[$\bullet$ The Naive Bayes algorithm is simple to implement, works well from the beginning and adjusting its
+      parameters is rarely necessary.]
+  \item[$\bullet$ Even though Naive Bayes has great advantages, a smoothing technique to prevent probabilities to be
+      zero was necessary.]
+  \item[$\bullet$ Considering the amount of data they can handle, the training and process of prediction are very
+      fast even when they start cold.]
+  \item[$\bullet$ Automatic learning was specifically applied to the supervised learning branch.]
+\end{description}
 
 % References
 \nocite{*}
