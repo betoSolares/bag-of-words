@@ -172,6 +172,37 @@ that it is equivalent to the joint probability. \\
     \label{fig:jcp_relationship}
 \end{figure}
 
+\subsection{Naive Bayes}
+Naive Bayes is a simple and powerful algorithm. Despite the significant advances in Machine Learning in recent
+years, it has proven its worth. It has been successfully implemented in many applications, from text analysis
+to recommendation engines.
+
+It is one of the simplest and most powerful algorithms for classification based on Bayes' Theorem with an assumption
+of independence between the predictors. It assumes that the effect of a particular feature on a class is independent
+of other features.
+
+Using the algorithm it is quick and easy to predict the kind of test data set. They also work well in multiclass
+prediction. When the independence assumption is held, a Naive Bayes classifier performs better compared to other
+models and less training data is required.
+It works well for categorical input variables compared to numeric variables.
+
+The disadvantages of using this algorithm are that if the categorical variable has a category in the test data set,
+which was not observed in the training data set, the model assigns a probability of 0 and will not be able to make
+a prediction. This is often known as the zero frequency. The smoothing technique can be used to solve this problem.
+
+Another disadvantage is the assumption of independent predictors. In real life it is almost impossible for us to
+obtain a set of predictors that are completely independent.
+
+This algorithm serves a core part in our solution, wo we will talk more on how we implemented it.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=3in]{naive_bayes}
+    \Description{Naive Bayes}
+    \caption{Naive Bayes}
+    \label{fig:naive_bayes}
+\end{figure}
+
 \section{Problem}
 
 \section{Similar Implementations}
