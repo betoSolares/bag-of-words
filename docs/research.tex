@@ -90,9 +90,9 @@ processing to classify words according to the tag. \\
 Many language processing tasks involve a classification, in which different machine learning methods
 can be used such as Maximum Entropy (ME), Support Vector Machines (SVE), Naive Bayes (NB) and many
 more, that is why that in this work the Naive Bayes algorithm was used, more specifically the
-Gaussian Naive Bayes algorithm. The Gaussian Naive Bayes algorithm is of great help as it proposes a
-solution to the categorization of text by assigning a label or a category to an entire text or
-document. \\
+Multinomial Naive Bayes algorithm. The Multinomial Naive Bayes algorithm is of great help as it
+proposes a solution to the categorization of text by assigning a label or a category to an entire
+text or document. \\
 
 All these methods and tools can be applied in different types of classifiers such as the
 classification of feelings, which is the process of automating or identifying opinions in the text
@@ -130,17 +130,18 @@ Later the theory of control and cybernetics that shared the theory of control, c
 And to finish the linguistics that computational linguistics contributed. \\
 
 There are different branches of artificial intelligence such as: Robotics, strong AI, reasoning and decision
-making, knowledge representation, planning, computer vision, machine learning, data mining, and language processing.
+making, knowledge representation, planning, computer vision, machine learning, data mining, and language
+processing. \\
 
 Machine learning and data mining consists of machines learning without having to be explicitly programmed for
 that task by means of previous data. Language processing is how a computer can analyze audio and then convert it
-to text for analysis. 
-
+to text for analysis. \\
 
 \subsection{Machine Learning}
 
 It consists of machines learning without having to be explicitly programmed for a given task, relyng only on
-previous data.
+previous data. \\
+
 Some of the fundamentals for this branch are inferential statistics, computer science and pattern recognition.
 Going deeper with statistics, Bayes' theorem is very important since it tells us the probability that an event will
 occur given the knowledge of certain previous conditions related to this event.
@@ -157,12 +158,12 @@ where the step from programming through rules to autonomous learning is generate
 
 There are three main types of machine learning: supervised learning, unsupervised learning and reinforcement learning.
 Supervised learning is when the agent is trained through data that is an example of the inputs and outputs that it
-should have, that is, with data that is labeled. 
+should have, that is, with data that is labeled. \\
+
 Unsupervised learning consists of learning through input patterns where the values for the outputs are not said,
 it means that a specific type is not identified, but similarities are sorted and grouped. 
 Finally, learning by effort, this is not taught with data but thanks to the environment that surrounds it and the
-actions it takes, depending on its result, it learns.
-
+actions it takes, depending on its result, it learns. \\
 
 \subsection{Joint and Conditional Probabilities}
 
@@ -173,7 +174,7 @@ practice this is the multiplication of the probabilities of one event if the oth
 the probability of the other event to occur. \\
 
 As we can see, the joint probability and the conditional probability are basically equal, so they are
-equivalent and we can denote it as follows.
+equivalent and we can denote it as follows. \\
 
 \begin{figure}[h!]
     \centering
@@ -194,7 +195,6 @@ known as the chain rule. \\
     \label{fig:jcp_relationship}
 \end{figure}
 
-
 \subsection{Statistical inference}
 
 For an artificial intelligence to try to predict using some classification algorithm it must first learn its
@@ -204,11 +204,11 @@ the others. With this, artificial intelligence acquires a tool to solve specific
 of information. \\
 
 In Bayesian learning methods, learning is formulated as a form of probabilistic inference, using observations to
-update a prior distribution on the hypothesis.
+update a prior distribution on the hypothesis. \\
+
 One simply calculate the probability of each hypothesis given the data, and make predictions on these samples.
 This means that the predictions are made using all the hypothesis, weighted by their probabilities and not only
-using the best of the hypothesis. In this way, learning is reduced to probabilistic inference.
-
+using the best of the hypothesis. In this way, learning is reduced to probabilistic inference. \\
 
 \subsection{Bayes Theorem}
 
@@ -226,7 +226,6 @@ significantly increasing the number of repetitions, there will be a perfectible 
 which will represent the foundation for learning by repetition, erring less and less until reaching
 an optimal knowledge of what is involved. \\
 
-
 This theorem appear from the solving of the conditional probability equation, since we could see
 that it is equivalent to the joint probability. \\
 
@@ -239,6 +238,7 @@ that it is equivalent to the joint probability. \\
 \end{figure}
 
 \subsection{Naive Bayes}
+
 Naive Bayes is a simple and powerful algorithm. Despite the significant advances in Machine Learning in recent
 years, it has proven its worth. It has been successfully implemented in many applications, from text analysis
 to recommendation engines. \\
@@ -249,8 +249,8 @@ of other features. \\
 
 Using the algorithm it is quick and easy to predict the kind of test data set. They also work well in multiclass
 prediction. When the independence assumption is held, a Naive Bayes classifier performs better compared to other
-models and less training data is required.
-It works well for categorical input variables compared to numeric variables. \\
+models and less training data is required. It works well for categorical input variables compared to
+numeric variables. \\
 
 The disadvantages of using this algorithm are that if the categorical variable has a category in the test data set,
 which was not observed in the training data set, the model assigns a probability of 0 and will not be able to make
@@ -258,7 +258,7 @@ a prediction. This is often known as the zero frequency. The smoothing technique
 Another disadvantage is the assumption of independent predictors. In real life it is almost impossible for us to
 obtain a set of predictors that are completely independent. \\
 
-This algorithm serves a core part in our solution, wo we will talk more on how we implemented it.
+This algorithm serves a core part in our solution, wo we will talk more on how we implemented it. \\
 
 \begin{figure}[h!]
     \centering
@@ -268,16 +268,14 @@ This algorithm serves a core part in our solution, wo we will talk more on how w
     \label{fig:naive_bayes}
 \end{figure}
 
-
 \subsection{Bag of Words}
 
 The Bag of Words is a method often used for document classification. This method turns text into fixed-length
 vectors by simply counting the number of times a word appears in a document, a process referred to as vectorization. \\
 
 Although these vectorization methods are easy to compute, it lacks any contextual information. It literally is a bag
-of words – there is no order, it’s only the word counts that matter.
-It is a data recovery system. It does the work of identifying all documents that are important for the user who
-seeks the information. \\
+of words – there is no order, it’s only the word counts that matter. It is a data recovery
+system. It does the work of identifying all documents that are important for the user who  seeks the information. \\
 
 \begin{figure}[h!]
     \centering
@@ -287,13 +285,14 @@ seeks the information. \\
     \label{fig:bow}
 \end{figure}
 
-This is also a core part of our project, thus, we will detail how our solution uses this algorithm.
+This is also a core part of our project, thus, we will detail how our solution uses this algorithm. \\
 
 \section{Our Problem}
 
 We are four university students and are currently coursing our fourth year of computer engineering. In this semester
 we enrolled to the Artificial Intelligence course, and so, we were assigned with this final project. We had to 
 implemente the fist stage of a text classification system to identify languages through input text.
+
 For this, we were appointed to use a Bag of Words system, in conjunction with a Bayesian model, more specifically,
 Naive Bayes. \\
 
@@ -310,17 +309,17 @@ in this case being a '|' (pipe character). Some examples could be: \\
 
 If the input is a user given phrase, we must be able to ask them for the corresonding name tag and associating each 
 other.
+
 The solution must process any given number of lines or phrases with any given number of labels. When inserting a new
 line or phrase the solution must be readjusted. It must be taken into account that when reading a CSV file or similar,
 the data should be normalized and cleaned. In addition, the solution must have a cold start option and at the time
 of interaction with the user, the recommendations must improve. \\
 
-The sofware had to be develped using any JVM compatible language, with the option of using any type of data base.
-
+The sofware had to be develped using any JVM compatible language, with the option of using any type of data base. \\
 
 \section{Similar Implementations}
 
-Another type of algorithms commonly used in automatic classification of texts are:
+Another type of algorithms commonly used in automatic classification of texts are: \\
 
 \subsection{Support vector machines(SVM)}
 
@@ -344,7 +343,7 @@ The line that best separates the zone of the blue dots from the red dots area is
 between them. Support vector machines are a Machine Learning technique that finds the best possible separation between
 classes. With two dimensions it is easy to understand what you are doing. Normally, automatic learning problems have a
 lot of dimensions. So instead of finding the optimal line, the SVM finds the hyperphan that maximizes the margin of
-separation between classes.
+separation between classes. \\
 
 \subsection{K-nearest neighbors algorithm (KNN)}
 
@@ -352,20 +351,19 @@ This is a learning algorithm based on supervised type instances of Machine Learn
 or to predict. It is a simple method, looks for the closest observations to which you are trying to predict and classify
 the point of interest based on most data that surrounds it. \\
 
-The solution for a Bag of Words classification is also simple.
+The solution for a Bag of Words classification is also simple. \\
+
 The distance between the word to classify and the rest of the words of the training dataset should be calculated. Then
 select the closest elements (with less distance, according to the function that is used). Finally, perform a "majority
-vote" between the K points: those of a class / dominant label will decide its final classification.
-
-
+vote" between the K points: those of a class / dominant label will decide its final classification. \\
 
 \section{Our Solution}
 
 In a way or another, we used all of the information previously exposed to acomplish this solution for the given problem.
-We developed a Bag of Words with Naive Bayes using the Java programming language.
+We developed a Bag of Words with Naive Bayes using the Java programming language. \\
 
 The interaction that the user will have with our solution will be through the command line. They will be presented
-with a series of menus, firstly they will see the main menu:
+with a series of menus, firstly they will see the main menu: \\
 
 \begin{figure}[h!]
     \centering
@@ -376,7 +374,7 @@ with a series of menus, firstly they will see the main menu:
 \end{figure}
 
 From this point, the user will be able to select any of the options inserting a number available among the given
-options. If the user selects 'Training', they will see the training menu:
+options. If the user selects 'Training', they will see the training menu: \\
 
 \begin{figure}[h!]
     \centering
@@ -387,7 +385,7 @@ options. If the user selects 'Training', they will see the training menu:
 \end{figure}
 
 In the training menu, the user can insert a standalone phrase an its tag, or a file with multiple lines following the
-structure previously stated:
+structure previously stated: \\
 
 \begin{figure}[h!]
     \centering
@@ -405,7 +403,6 @@ structure previously stated:
     \label{fig:bulk_file}
 \end{figure}
 
-
 \section{Results}
 
 As part of the user experience, one could see the knowledge owned by the solution: \\
@@ -417,16 +414,9 @@ As part of the user experience, one could see the knowledge owned by the solutio
     \caption{Knowledge base}
     \label{fig:knowledge}
 \end{figure}
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=3in]{knowledge}
-%     \Description{Knowledge base}
-%     \caption{Knowledge base}
-%     \label{fig:knowledge}
-% \end{figure}
 
 As part of the results achived when trying to infer a language from an input, we got the following results with the
-training data detailed in Figure 11:
+training data detailed in Figure 11: \\
 
 \begin{figure}[h!]
     \centering
@@ -436,19 +426,24 @@ training data detailed in Figure 11:
     \label{fig:inference}
 \end{figure}
 
-
 \section{Conclusions}
 
 \begin{description}
+
     \item[$\bullet$] One of the greatest advantages of Naive Bayes over other classification algorithms is its ability
       to process an extremely large amount of data. \\
+
   \item[$\bullet$] The Naive Bayes algorithm is simple to implement, works well from the beginning and adjusting its
       parameters is rarely necessary. \\
+
   \item[$\bullet$] Even though Naive Bayes has great advantages, a smoothing technique to prevent probabilities to be
       zero was necessary. \\
+
   \item[$\bullet$] Considering the amount of data they can handle, the training and process of prediction are very
       fast even when they start cold. \\
+
   \item[$\bullet$] Automatic learning was specifically applied to the supervised learning branch. \\
+
 \end{description}
 
 % References
